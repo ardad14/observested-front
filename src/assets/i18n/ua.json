@@ -1,0 +1,55 @@
+{
+    "navbar": {
+        "analytics": "Аналітика",
+        "clients": "Клієнти",
+        "workers": "Працівники",
+        "exit": "Вийти"
+    },
+    "analytics": {
+        "dataTitle": "Необроблені дані",
+        "table": {
+            "clients": "Клієнт",
+            "money": "Гроші",
+            "date": "Дата"
+        },
+        "sidebar": {
+            "general": "Загальна",
+            "month": "Місячна",
+            "clients": "Клієнти",
+            "goods": "Товари"
+        },
+        "general": {
+            "title": "Загальна"
+        },
+        "month": {
+            "title": "Місячна"
+        },
+        "clients": {
+            "title": "Клієнти"
+        },
+        "goods": {
+            "title": "Товари",
+            "good": "Товар"
+        }
+    },
+    "clients": {
+        "title": "Клієнти",
+        "table": {
+            "name": "Ім'я",
+            "surname": "Прізвище",
+            "age": "Вік",
+            "spendMoney": "Витрачені кошти",
+            "change": "Змінити"
+        }
+    },
+    "workers": {
+        "title": "Працівники",
+        "table": {
+            "name": "Ім'я",
+            "surname": "Прізвище",
+            "email": "Пошта",
+            "position": "Позиція"
+        },
+        "addNewWorker": "Додати нового працівника"
+    }
+}

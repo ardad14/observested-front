@@ -1,0 +1,55 @@
+{
+    "navbar": {
+        "analytics": "Analytics",
+        "clients": "Clients",
+        "workers": "Workers",
+        "exit": "Exit"
+    },
+    "analytics": {
+        "dataTitle": "Raw data",
+        "table": {
+            "clients": "Client",
+            "money": "Money",
+            "date": "Date"
+        },
+        "sidebar": {
+            "general": "General",
+            "month": "Month",
+            "clients": "Clients",
+            "goods": "Goods"
+        },
+        "general": {
+            "title": "General"
+        },
+        "month": {
+            "title": "Month"
+        },
+        "clients": {
+            "title": "Clients"
+        },
+        "goods": {
+            "title": "Goods",
+            "good": "Good"
+        }
+    },
+    "clients": {
+        "title": "Clients",
+        "table": {
+            "name": "Name",
+            "surname": "Surname",
+            "age": "Age",
+            "spendMoney": "Spend money",
+            "change": "Change"
+        }
+    },
+    "workers": {
+        "title": "Workers",
+        "table": {
+            "name": "Name",
+            "surname": "Surname",
+            "email": "Email",
+            "position": "Role"
+        },
+        "addNewWorker": "Add new worker"
+    }
+}
