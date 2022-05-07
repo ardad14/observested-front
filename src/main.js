@@ -6,9 +6,6 @@ import 'jquery/src/jquery.js'
 import 'bootstrap/dist/js/bootstrap.min.js';
 import router from './router'
 
-/*const app = createApp(App)
-app.use(i18n).mount('#app')*/
-
 const app = createApp(App,{
     data: () => ({
         user: {},

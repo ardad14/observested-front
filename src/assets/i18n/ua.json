@@ -51,5 +51,27 @@
             "position": "Позиція"
         },
         "addNewWorker": "Додати нового працівника"
+    },
+    "login": {
+        "login": "Увійти",
+        "mail": "Пошта",
+        "password": "Пароль",
+        "don`t_have_account": "Ще не маєте акаунт?",
+        "create_account": "Сторвити акаунт"
+    },
+    "register": {
+        "register": "Реєстрація",
+        "name": "Ім'я",
+        "surname": "Прізвище",
+        "mail": "Пошта",
+        "password": "Пароль",
+        "role": "Роль",
+        "roles": {
+            "admin": "Адміністратор",
+            "manager": "Менеджер",
+            "worker": "Працівник"
+        },
+        "already_has_account": "Вже є акаунт?",
+        "login": "Увійти"
     }
 }
