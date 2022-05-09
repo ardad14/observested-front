@@ -30,6 +30,8 @@ export const storeAnnouncement = (data, authToken) => axios.post(`${BASE_URL}/an
 export const updateAnnouncement = (data, authToken) => axios.put(`${BASE_URL}/announcements`, data, {headers: AUTH_HEADERS(authToken)});
 export const deleteAnnouncement = (id, authToken) => axios.delete(`${BASE_URL}/announcements/${id}`, {headers: AUTH_HEADERS(authToken)});*/
 
+export const getGeneralAnalytics = (authToken) => axios.get(`${BASE_URL}/analytics/general`, {headers: AUTH_HEADERS(authToken)});
+
 export const register = (data) => axios.post(`${BASE_URL}/register`, data,{headers: DEFAULT_HEADERS});
 export const login = (data) => axios.post(`${BASE_URL}/login`, data,{headers: DEFAULT_HEADERS});
 export const logout = (authToken) => axios.post(`${BASE_URL}/logout`, {},{headers: AUTH_HEADERS(authToken)});

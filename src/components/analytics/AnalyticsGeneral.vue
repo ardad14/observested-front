@@ -16,9 +16,12 @@
                         </button>
                     </div>-->
                 </div>
-
-                <canvas class="my-4 w-100 chartjs-render-monitor" ref="canvas" id="myChart"  width="1479" height="624" style="display: block; width: 1479px; height: 624px;"></canvas>
-
+                <Bar
+                    :chart-options="this.chartOptions"
+                    :chart-data="this.chartData"
+                    :width="1479"
+                    :height="624"
+                />
                 <h2>{{ $t("analytics.dataTitle") }}</h2>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
@@ -31,10 +34,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(action, index) in this.actionsData" :key="index">
+                        <tr v-for="(action, index) in this.generalAnalyticsData.customers" :key="index">
                             <td>{{ index }}</td>
-                            <td>{{ action.client_id }}</td>
-                            <td>{{ action.spend_money }}</td>
+                            <td>{{ action.id }}</td>
+                            <td>{{ action.pivot.spend_money }}</td>
                             <td>{{ convertData(action.created_at) }}</td>
                         </tr>
                         </tbody>
@@ -49,70 +52,88 @@
 import AnalyticsSidebar from "@/components/analytics/AnalyticsSidebar";
 import moment from 'moment/moment';
 import { Bar } from 'vue-chartjs'
+import {getGeneralAnalytics} from "@/api";
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 export default {
     name: "AnalyticsGeneral",
     components: {
         AnalyticsSidebar,
+        Bar
     },
-    extends: Bar,
+    data: () => ({
+        generalAnalyticsData: [],
+        chartData: Object,
+        chartOptions: Object,
+    }),
+    beforeMount() {
+        if (localStorage.getItem('authToken') === null) {
+            this.$router.push('/login');
+            return;
+        }
+        getGeneralAnalytics(localStorage.getItem('authToken'))
+            .then(response => {
+                this.generalAnalyticsData = response.data.actions;
+                this.render();
+            })
+            .catch(response => console.log(response.data))
+
+    },
     methods: {
         convertData: function (date) {
             return moment(date).format("MMMM Do YYYY, h:mm:a")
-        }
-    },
-    mounted: function () {
-        let actionsData = this.actionsData;
-        let monthMoney = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        console.log(monthMoney);
+        },
+        render: function () {
+            let actionsData = this.generalAnalyticsData;
+            let monthMoney = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            console.log(actionsData);
+            actionsData.customers.forEach(data => {monthMoney[moment(data.created_at).month()] += data.pivot.spend_money})
 
-        actionsData.forEach(data => {monthMoney[moment(data.created_at).month()] += data.spend_money})
+            this.chartData = {
+                labels: moment.months(),
+                datasets: [{
+                    label: 'Money',
+                    data: monthMoney,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)',
+                        'rgba(39, 174, 96, 0.5)',
+                        'rgba(72, 52, 212, 0.5)',
+                        'rgba(253, 121, 168, 0.5)',
+                        'rgba(162, 155, 254, 0.5)',
+                        'rgba(83, 92, 104, 0.5)',
+                        'rgba(186, 220, 88, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(39, 174, 96, 1.0)',
+                        'rgba(72, 52, 212, 1.0)',
+                        'rgba(253, 121, 168, 1.0)',
+                        'rgba(162, 155, 254, 1.0)',
+                        'rgba(83, 92, 104, 1.0)',
+                        'rgba(186, 220, 88, 1.0)'
+                    ],
+                    borderWidth: 2
+                }]
+            };
 
-
-        let chartData = {
-            labels: moment.months(),
-            datasets: [{
-                label: 'Money',
-                data: monthMoney,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
-                    'rgba(39, 174, 96, 0.5)',
-                    'rgba(72, 52, 212, 0.5)',
-                    'rgba(253, 121, 168, 0.5)',
-                    'rgba(162, 155, 254, 0.5)',
-                    'rgba(83, 92, 104, 0.5)',
-                    'rgba(186, 220, 88, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(39, 174, 96, 1.0)',
-                    'rgba(72, 52, 212, 1.0)',
-                    'rgba(253, 121, 168, 1.0)',
-                    'rgba(162, 155, 254, 1.0)',
-                    'rgba(83, 92, 104, 1.0)',
-                    'rgba(186, 220, 88, 1.0)'
-                ],
-                borderWidth: 2
-            }]
-        };
-
-        let options = {
-            legend: {
-                display: false
+            this.chartOptions = {
+                legend: {
+                    display: false
+                }
             }
         }
-        this.renderChart(chartData, options);
-    }
+    },
 }
 </script>
 
