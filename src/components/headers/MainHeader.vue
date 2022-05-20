@@ -10,9 +10,14 @@
                                         <li><a type="button" href="/signUp" class="btn btn-primary me-2">Увійти</a></li>-->
                     <li class="nav-item"><a href="/logOut" class="btn btn-primary me-2">{{ $t("navbar.exit") }}</a></li>
                     <li>
-                        <div class="locale-changer">
-                            <a href="#" @click="setLocale('ua')">ua</a>
-                            <a href="#" @click="setLocale('en')">en</a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ $t("navbar.language") }}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a href="#" @click="setLocale('uk')">ua</a></li>
+                                <li><a href="#" @click="setLocale('en-gb')">en</a></li>
+                            </ul>
                         </div>
                     </li>
                 </ul>

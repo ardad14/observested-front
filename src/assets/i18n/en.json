@@ -3,7 +3,8 @@
         "analytics": "Analytics",
         "clients": "Clients",
         "workers": "Workers",
-        "exit": "Exit"
+        "exit": "Exit",
+        "language": "En"
     },
     "analytics": {
         "dataTitle": "Raw data",
@@ -29,7 +30,8 @@
         },
         "goods": {
             "title": "Goods",
-            "good": "Good"
+            "good": "Good",
+            "price": "Price"
         }
     },
     "clients": {

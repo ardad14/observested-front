@@ -3,7 +3,8 @@ import App from './App.vue'
 import i18n from "@/i18n"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/src/jquery.js'
-import 'bootstrap/dist/js/bootstrap.min.js';
+//import 'bootstrap/dist/js/bootstrap.min.js';
+import 'popper.js'
 import router from './router'
 
 const app = createApp(App,{

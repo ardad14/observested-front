@@ -3,7 +3,8 @@
         "analytics": "Аналітика",
         "clients": "Клієнти",
         "workers": "Працівники",
-        "exit": "Вийти"
+        "exit": "Вийти",
+        "language": "Ua"
     },
     "analytics": {
         "dataTitle": "Необроблені дані",
@@ -29,7 +30,8 @@
         },
         "goods": {
             "title": "Товари",
-            "good": "Товар"
+            "good": "Товар",
+            "price": "Вартість"
         }
     },
     "clients": {
