@@ -1,20 +1,30 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <AnalyticsSidebar currentTab="general" />
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <AnalyticsSidebar currentTab="general"/>
+            <div class="wrapper col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                        <div class=""></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink">
+                        <div class=""></div>
+                    </div>
+                </div>
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">{{ $t("analytics.general.title") }}</h1>
                 </div>
                 <Bar
                     :chart-options="this.chartOptions"
                     :chart-data="this.chartData"
-                    :width="1479"
-                    :height="624"
+                    :width="1200"
+                    :height="500"
+                    class="bar"
                 />
                 <h2>{{ $t("analytics.dataTitle") }}</h2>
-                 <div class="table-responsive">
-                    <table class="table table-striped table-sm">
+                <div class="table-responsive">
+                    <table>
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -33,7 +43,7 @@
                         </tbody>
                     </table>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
 </template>
@@ -41,9 +51,10 @@
 <script>
 import AnalyticsSidebar from "@/components/analytics/AnalyticsSidebar";
 import moment from 'moment/moment';
-import { Bar } from 'vue-chartjs'
+import {Bar} from 'vue-chartjs'
 import {getGeneralAnalytics} from "@/api";
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import {Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js'
+
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 require(`moment/locale/${localStorage.getItem('locale')}`);
 
@@ -75,7 +86,9 @@ export default {
             let actionsData = this.generalAnalyticsData;
             let monthMoney = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             console.log(actionsData);
-            actionsData.forEach(data => {monthMoney[moment(data.created_at).month()] += data.pivot.spend_money})
+            actionsData.forEach(data => {
+                monthMoney[moment(data.created_at).month()] += data.pivot.spend_money
+            })
 
             this.chartData = {
                 labels: moment.months(),
@@ -128,41 +141,92 @@ export default {
 </script>
 
 <style scoped>
-    h1{
-        font-family: 'Montserrat', sans-serif;
-        font-size: 30px;
-        font-weight: 500;
-    }
-    h2{
-        font-family: 'Montserrat', sans-serif;
-        font-size: 30px;
-        font-weight: 500;
-        margin: 30px 0;
-    }
 
-    table th{
-        font-family: 'Montserrat', sans-serif;
-        background: #A0A0A0;
-        margin-right: 5px;
-        color: white;
-        padding: 10px 5px;
-    }
-    td:first-child {
-        background:#A0A0A0;
-        font-family: 'Montserrat', sans-serif;
-        color: white;
-        padding: 10px 5px;
-    }
-    th, td {
-        border-style: solid;
-        font-size: 18px;
-        border-width: 0 1px 1px 0;
-        border-color: white;
-    }
-    td {
-        background: #E8E8E8;
-    }
-    th:first-child, td:first-child {
-        text-align: center;
-    }
+h1 {
+    font-family: 'Martel Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 40px;
+}
+
+h2 {
+    font-family: 'Martel Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 50px 0;
+}
+
+hr {
+    transform: rotate(90deg);
+    position: relative;
+
+    margin-top: 0;
+}
+
+.bar {
+    border-radius: 100px;
+    border: 1px solid #808191;
+    padding: 40px;
+    width: 90%;
+}
+
+table th {
+    font-family: 'Martel Sans', sans-serif;
+    background: #0052CC;
+    margin-right: 5px;
+    color: white;
+    border-color: white;
+    padding: 10px 5px;
+}
+
+td:first-child {
+    background: #0052CC;
+    font-family: 'Martel Sans', sans-serif;
+    color: white;
+    padding: 10px 5px;
+}
+
+th, td:first-child {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: #FFFFFF;
+    font-size: 18px;
+}
+
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: #0052CC;
+    font-size: 18px;
+    color: #0052CC;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 21px;
+    font-family: 'Martel Sans', sans-serif;
+
+}
+
+td {
+    background: #fff;
+}
+
+th:first-child, td:first-child {
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Martel Sans', sans-serif;
+    width: 5%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 10%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 10%;
+}
+
+th:last-child, td:last-child {
+    width: 15%;
+}
 </style>

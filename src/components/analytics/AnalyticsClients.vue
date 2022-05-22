@@ -1,20 +1,29 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <AnalyticsSidebar currentTab="clients" />
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+            <AnalyticsSidebar currentTab="clients"/>
+            <div class="wrapper col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                        <div class=""></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink">
+                        <div class=""></div>
+                    </div>
+                </div>
                 <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="col-5 h2">{{ $t("analytics.clients.title") }}</h1>
                 </div>
                 <Bar
                     :chart-options="this.chartOptions"
                     :chart-data="this.chartData"
-                    :width="1479"
-                    :height="624"
+                    :width="1200"
+                    :height="500"
+                    class="bar"
                 />
                 <h2>{{ $t("analytics.dataTitle") }}</h2>
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm">
+                    <table>
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -33,7 +42,7 @@
                         </tbody>
                     </table>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
 </template>
@@ -41,9 +50,10 @@
 <script>
 import AnalyticsSidebar from "@/components/analytics/AnalyticsSidebar";
 import moment from 'moment/moment';
-import { Bar } from 'vue-chartjs'
+import {Bar} from 'vue-chartjs'
 import {getGeneralAnalytics} from "@/api";
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import {Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js'
+
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 require(`moment/locale/${localStorage.getItem('locale')}`);
 
@@ -78,7 +88,7 @@ export default {
             let teenagers = actionsData.filter(data => data.age >= 15 && data.age <= 24);
             let young = actionsData.filter(data => data.age >= 25 && data.age <= 44);
             let mid = actionsData.filter(data => data.age >= 45 && data.age <= 64);
-            let old  = actionsData.filter(data => data.age >= 65);
+            let old = actionsData.filter(data => data.age >= 65);
 
             let childrenMoney = 0;
             let teenagersMoney = 0;
@@ -86,11 +96,21 @@ export default {
             let midMoney = 0;
             let oldMoney = 0;
 
-            children.forEach(data => {childrenMoney += data.pivot.spend_money});
-            teenagers.forEach(data => {teenagersMoney += data.pivot.spend_money});
-            young.forEach(data => {youngMoney += data.pivot.spend_money});
-            mid.forEach(data => {midMoney += data.pivot.spend_money});
-            old.forEach(data => {oldMoney += data.pivot.spend_money});
+            children.forEach(data => {
+                childrenMoney += data.pivot.spend_money
+            });
+            teenagers.forEach(data => {
+                teenagersMoney += data.pivot.spend_money
+            });
+            young.forEach(data => {
+                youngMoney += data.pivot.spend_money
+            });
+            mid.forEach(data => {
+                midMoney += data.pivot.spend_money
+            });
+            old.forEach(data => {
+                oldMoney += data.pivot.spend_money
+            });
 
             let labels = ['10-14', '15-24', '25-44', '45-64', '65+']
             let data = [childrenMoney, teenagersMoney, youngMoney, midMoney, oldMoney];
@@ -128,7 +148,9 @@ export default {
         },
         calculateMedian: function (array) {
             let half = Math.floor(array.length / 2);
-            array.sort(function(a, b) { return a - b;});
+            array.sort(function (a, b) {
+                return a - b;
+            });
 
             if (array.length % 2) {
                 return array[half];
@@ -141,41 +163,92 @@ export default {
 </script>
 
 <style scoped>
-    h1{
-        font-family: 'Montserrat', sans-serif;
-        font-size: 30px;
-        font-weight: 500;
-    }
-    h2{
-        font-family: 'Montserrat', sans-serif;
-        font-size: 30px;
-        font-weight: 500;
-        margin: 30px 0;
-    }
 
-    table th{
-        font-family: 'Montserrat', sans-serif;
-        background: #A0A0A0;
-        margin-right: 5px;
-        color: white;
-        padding: 10px 5px;
-    }
-    td:first-child {
-        background:#A0A0A0;
-        font-family: 'Montserrat', sans-serif;
-        color: white;
-        padding: 10px 5px;
-    }
-    th, td {
-        border-style: solid;
-        border-width: 0 1px 1px 0;
-        border-color: white;
-        font-size: 18px;
-    }
-    td {
-        background: #E8E8E8;
-    }
-    th:first-child, td:first-child {
-        text-align: center;
-    }
+h1 {
+    font-family: 'Martel Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 40px;
+}
+
+h2 {
+    font-family: 'Martel Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 50px 0;
+}
+
+hr {
+    transform: rotate(90deg);
+    position: relative;
+
+    margin-top: 0;
+}
+
+.bar {
+    border-radius: 100px;
+    border: 1px solid #808191;
+    padding: 40px;
+    width: 90%;
+}
+
+table th {
+    font-family: 'Martel Sans', sans-serif;
+    background: #0052CC;
+    margin-right: 5px;
+    color: white;
+    border-color: white;
+    padding: 10px 5px;
+}
+
+td:first-child {
+    background: #0052CC;
+    font-family: 'Martel Sans', sans-serif;
+    color: white;
+    padding: 10px 5px;
+}
+
+th, td:first-child {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: #FFFFFF;
+    font-size: 18px;
+}
+
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: #0052CC;
+    font-size: 18px;
+    color: #0052CC;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 21px;
+    font-family: 'Martel Sans', sans-serif;
+
+}
+
+td {
+    background: #fff;
+}
+
+th:first-child, td:first-child {
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Martel Sans', sans-serif;
+    width: 5%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 10%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 10%;
+}
+
+th:last-child, td:last-child {
+    width: 15%;
+}
 </style>
