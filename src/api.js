@@ -33,6 +33,9 @@ export const deleteAnnouncement = (id, authToken) => axios.delete(`${BASE_URL}/a
 export const getGeneralAnalytics = (authToken) => axios.get(`${BASE_URL}/analytics/general`, {headers: AUTH_HEADERS(authToken)});
 export const getProductAnalytics = (authToken) => axios.get(`${BASE_URL}/analytics/products`, {headers: AUTH_HEADERS(authToken)});
 
+export const getUsersForPlace = (authToken) => axios.get(`${BASE_URL}/users/place`, {headers: AUTH_HEADERS(authToken)});
+export const getCustomersForPlace = (authToken) => axios.get(`${BASE_URL}/customers/place`, {headers: AUTH_HEADERS(authToken)});
+
 export const register = (data) => axios.post(`${BASE_URL}/register`, data,{headers: DEFAULT_HEADERS});
 export const login = (data) => axios.post(`${BASE_URL}/login`, data,{headers: DEFAULT_HEADERS});
 export const logout = (authToken) => axios.post(`${BASE_URL}/logout`, {},{headers: AUTH_HEADERS(authToken)});

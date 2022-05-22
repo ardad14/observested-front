@@ -38,7 +38,7 @@
                             <td>{{ index }}</td>
                             <td>{{ action.id }}</td>
                             <td>{{ action.pivot.spend_money }}</td>
-                            <td>{{ convertData(action.created_at) }}</td>
+                            <td>{{ convertData(action.pivot.created_at) }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -85,9 +85,11 @@ export default {
         render: function () {
             let actionsData = this.generalAnalyticsData;
             let monthMoney = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-            console.log(actionsData);
+
             actionsData.forEach(data => {
-                monthMoney[moment(data.created_at).month()] += data.pivot.spend_money
+                if (new Date(data.pivot.created_at).getFullYear() === new Date().getFullYear()) {
+                    monthMoney[moment(data.pivot.created_at).month()] += data.pivot.spend_money
+                }
             })
 
             this.chartData = {

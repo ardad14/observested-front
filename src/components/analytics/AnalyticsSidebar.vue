@@ -10,7 +10,7 @@
             <div class="dropdown">
                 <button class="btnAnalytics dropdown-toggle" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                    Аналитика
+                    {{ $t("navbar.analytics") }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li :class="[currentTab === 'general' ? 'current' : '', 'nav-item']">
@@ -71,11 +71,11 @@
         </div>
         <div class="clients">
             <img alt="Vue logo" src="../../assets/icons8-популярный-человек-100.png">
-            <a href="">Клiенти</a>
+            <a href="/workers">{{ $t("navbar.workers") }}</a>
         </div>
         <div class="product">
             <img alt="Vue logo" src="../../assets/icons8-товар-100.png">
-            <a href="">Товари</a>
+            <a href="/customers">{{ $t("navbar.customers") }}</a>
         </div>
         <hr>
         <div class="language">
