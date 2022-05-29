@@ -1,20 +1,20 @@
 <template>
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
         <div class="title">
-            <img alt="Vue logo" src="../../assets/image_2022-05-19_16-23-21.png">
+            <img alt="Vue logo" src="../../assets/icons/image_2022-05-19_16-23-21.png">
             <h2>Observested</h2>
         </div>
         <hr>
         <div class="analytics">
-            <img alt="Vue logo" src="../../assets/icons8-chart-bar-96.png">
+            <img alt="Vue logo" src="../../assets/icons/icons8-chart-bar-96.png">
             <div class="dropdown">
                 <button class="btnAnalytics dropdown-toggle" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
                     {{ $t("navbar.analytics") }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li :class="[currentTab === 'general' ? 'current' : '', 'nav-item']">
-                        <a :class="[currentTab === 'general' ? 'disabled text-white' : '', 'nav-link']"
+                    <li :class="[currentTab === 'general' ? 'analytics' : '', 'nav-item']">
+                        <a :class="[currentTab === 'general' ? '' : '', 'nav-link']"
                            aria-current="page"
                            href="/analytics/general">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -27,8 +27,8 @@
                             {{ $t("analytics.sidebar.general") }}
                         </a>
                     </li>
-                    <li :class="[currentTab === 'month' ? 'current' : '', 'nav-item']">
-                        <a :class="[currentTab === 'month' ? 'disabled text-white' : '', 'nav-link']"
+                    <li :class="[currentTab === 'month' ? 'analytics' : '', 'nav-item']">
+                        <a :class="[currentTab === 'month' ? '' : '', 'nav-link']"
                            href="/analytics/month">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                  class="bi bi-calendar-date" viewBox="0 0 16 16">
@@ -40,8 +40,8 @@
                             {{ $t("analytics.sidebar.month") }}
                         </a>
                     </li>
-                    <li :class="[currentTab === 'clients' ? 'current' : '', 'nav-item']">
-                        <a :class="[currentTab === 'clients' ? 'disabled text-white' : '', 'nav-link']"
+                    <li :class="[currentTab === 'clients' ? 'analytics' : '', 'nav-item']">
+                        <a :class="[currentTab === 'clients' ? '' : '', 'nav-link']"
                            href="/analytics/clients">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none"
@@ -55,8 +55,8 @@
                             {{ $t("analytics.sidebar.clients") }}
                         </a>
                     </li>
-                    <li :class="[currentTab === 'goods' ? 'current' : '', 'nav-item']">
-                        <a :class="[currentTab === 'goods' ? 'disabled text-white' : '', 'nav-link']"
+                    <li :class="[currentTab === 'goods' ? 'analytics' : '', 'nav-item']">
+                        <a :class="[currentTab === 'goods' ? '' : '', 'nav-link']"
                            href="/analytics/goods">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                  class="bi bi-shop" viewBox="0 0 16 16">
@@ -69,17 +69,25 @@
                 </ul>
             </div>
         </div>
-        <div class="clients">
-            <img alt="Vue logo" src="../../assets/icons8-популярный-человек-100.png">
+        <div :class="[currentTab === 'workers' ? 'current' : 'list', 'nav-item']">
+            <img alt="Vue logo" src="../../assets/icons/icons8-популярный-человек-100.png" >
             <a href="/workers">{{ $t("navbar.workers") }}</a>
         </div>
-        <div class="product">
-            <img alt="Vue logo" src="../../assets/icons8-товар-100.png">
+        <div :class="[currentTab === 'customers' ? 'current' : 'list', 'nav-item']">
+            <img alt="Vue logo" src="../../assets/icons/icons8_мужчины_возрастной_группы_5_100_1.png">
             <a href="/customers">{{ $t("navbar.customers") }}</a>
         </div>
+        <div :class="[currentTab === 'products' ? 'current' : 'list', 'nav-item']">
+            <img alt="Vue logo" src="../../assets/icons/icons8-товар-100.png">
+            <a href="/products">{{ $t("navbar.products") }}</a>
+        </div>
         <hr>
+        <div :class="[currentTab === 'places' ? 'current' : 'list', 'nav-item']">
+            <img alt="Vue logo" src="../../assets/icons/icons8-здание-ресторана-100.png">
+            <a href="/places">{{ $t("navbar.places") }}</a>
+        </div>
         <div class="language">
-            <img alt="Vue logo" src="../../assets/icons8-география.png">
+            <img alt="Vue logo" src="../../assets/icons/icons8-география.png">
             <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -92,13 +100,15 @@
             </div>
         </div>
         <div class="exit">
-            <img alt="Vue logo" src="../../assets/icons8-выход.png">
-            <a href="">Вихiд</a>
+            <img alt="Vue logo" src="../../assets/icons/icons8-выход.png">
+            <a @click="logout"> {{ $t("navbar.exit") }}</a>
         </div>
     </nav>
 </template>
 
 <script>
+import {logout} from "@/api";
+
 export default {
     name: "AnalyticsSidebar",
     props: {
@@ -108,6 +118,14 @@ export default {
         setLocale: function (locale) {
             localStorage.setItem('locale', locale);
             window.location.reload();
+        },
+        logout: () => {
+            logout(localStorage.getItem('authToken'))
+                .then(() => {
+                    localStorage.removeItem("authToken");
+                    localStorage.removeItem("authTokenDate");
+                    window.location.replace('/login');
+                })
         }
     }
 }
@@ -117,20 +135,51 @@ export default {
 .title {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 30px;
 }
 
 .title img {
     width: 50px;
+    margin-top: 30px;
 }
 
-.title h2{
+.title h2 {
     position: relative;
     top: 13px;
+    margin-top: 30px;
+
 }
 
 .current {
-    background-color: #bdbdbd;
+    background-color: #0052CC;
+    padding: 10px 10px 10px 20px;
+    color: white;
+    margin-top: 30px;
+    border-radius: 56px;
+}
+
+.analytics a:hover {
+    color: black;
+}
+
+.current a {
+    color: white;
+    position: relative;
+    font-size: 28px;
+    top: 6px;
+    left: 18px;
+}
+
+
+.current img {
+    color: black;
+    width: 50px;
+    filter: brightness(5);
+}
+
+
+.current a:hover {
+    color: white;
+    text-decoration: none;
 }
 
 ul a {
@@ -144,11 +193,11 @@ a:hover {
     color: blue;
 }
 
-.analytics{
+.analytics {
     display: flex;
 }
 
-.analytics img{
+.analytics img {
     color: black;
     width: 50px;
 }
@@ -197,11 +246,12 @@ ul li {
     border: none;
 }
 
-.clients img{
+.clients img {
     color: black;
     width: 50px;
 }
-.clients a{
+
+.clients a {
     color: black;
     position: relative;
     font-size: 24px;
@@ -209,11 +259,13 @@ ul li {
     left: 18px;
 
 }
-.product img{
+
+.list img {
     color: black;
     width: 50px;
 }
-.product a{
+
+.list a {
     color: black;
     position: relative;
     font-size: 24px;
@@ -221,23 +273,24 @@ ul li {
     left: 18px;
 }
 
-.product{
+.list {
     margin-top: 40px;
 }
 
-.clients{
+.clients {
     margin-top: 25px;
 }
 
-.exit{
+.exit {
     margin-top: 25px;
 }
-.exit img{
+
+.exit img {
     color: black;
     width: 50px;
 }
 
-.exit a{
+.exit a {
     color: black;
     position: relative;
     font-size: 24px;

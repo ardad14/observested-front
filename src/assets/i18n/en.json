@@ -3,6 +3,8 @@
         "analytics": "Analytics",
         "customers": "Customers",
         "workers": "Workers",
+        "products": "Products",
+        "places": "Places",
         "exit": "Exit",
         "language": "En"
     },
@@ -75,5 +77,29 @@
         },
         "already_has_account": "Already has account?",
         "login": "Login"
+    },
+    "places": {
+        "address": "Address",
+        "open": "Open",
+        "close": "Close",
+        "redirect": "Open",
+        "create_place": "Create place",
+        "create_from_existed": "Add existed place"
+    },
+    "create_place": {
+        "title": "Create place",
+        "name": "Name",
+        "address": "Address",
+        "open": "Open",
+        "close": "Close",
+        "create": "Create"
+    },
+    "edit_place": {
+        "title": "Edit place",
+        "name": "Name",
+        "address": "Address",
+        "open": "Open",
+        "close": "Close",
+        "edit": "Edit"
     }
 }

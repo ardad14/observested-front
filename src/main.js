@@ -1,25 +1,28 @@
 import {createApp} from 'vue'
+import {createStore} from "vuex";
 import App from './App.vue'
 import i18n from "@/i18n"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/src/jquery.js'
-//import 'bootstrap/dist/js/bootstrap.min.js';
 import 'popper.js'
 import router from './router'
 
-const app = createApp(App,{
-    data: () => ({
-        user: {},
-    }),
-    beforeMount() {
-        let deleteTokenDate = Date.parse(localStorage.getItem('authTokenDate'));
-        deleteTokenDate.setHours(deleteTokenDate.getHours + 24);
-        if (deleteTokenDate <= new Date()) {
-            localStorage.removeItem("authToken");
-            localStorage.removeItem("authTokenDate");
+// Create a new store instance.
+const store = createStore({
+    state () {
+        return {
+            place: {}
+        }
+    },
+    mutations: {
+        setPlace (state, payload) {
+            state.place = payload
         }
     }
 })
+
+const app = createApp(App, {});
 app.use(router);
 app.use(i18n);
+app.use(store);
 app.mount('#app');

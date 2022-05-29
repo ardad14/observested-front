@@ -11,8 +11,9 @@
                         <div class=""></div>
                     </div>
                 </div>
-                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="col-5 h2">{{ $t("analytics.clients.title") }}</h1>
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1>{{ $t("analytics.clients.title") }}</h1>
+                    <h2>{{ place.name }}</h2>
                 </div>
                 <Bar
                     :chart-options="this.chartOptions"
@@ -68,12 +69,17 @@ export default {
         chartData: Object,
         chartOptions: Object,
     }),
+    computed: {
+        place() {
+            return this.$store.state.place
+        }
+    },
     beforeMount() {
         if (localStorage.getItem('authToken') === null) {
             this.$router.push('/login');
             return;
         }
-        getGeneralAnalytics(localStorage.getItem('authToken'))
+        getGeneralAnalytics(localStorage.getItem('authToken'), localStorage.getItem('actualPlaceId'))
             .then(response => {
                 this.generalAnalyticsData = response.data.actions.customers;
                 this.render();
@@ -173,9 +179,12 @@ h1 {
 
 h2 {
     font-family: 'Martel Sans', sans-serif;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 700;
-    margin: 50px 0;
+    margin-top: 50px;
+    position:relative;
+    right: 50px;
+    color: #808191;
 }
 
 hr {

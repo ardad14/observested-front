@@ -55,10 +55,10 @@ export default {
         'password': this.password,
       })
           .then(response => {
-            this.$root.user = response.data.user;
             localStorage.setItem('authToken', response.data.token);
             localStorage.setItem('authTokenDate', new Date().toISOString());
-            localStorage.setItem('role', response.data.user.role);
+            //localStorage.setItem('role', response.data.user.role);
+            this.$router.push('/analytics/general');
           })
           .catch(e => {
             console.log(e)

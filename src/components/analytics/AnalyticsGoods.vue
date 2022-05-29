@@ -13,6 +13,7 @@
                 </div>
                 <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="col-5 h2">{{ $t("analytics.goods.title") }}</h1>
+                    <h2>{{ this.place.name }}</h2>
                 </div>
                 <Bar
                     :chart-options="this.chartOptions"
@@ -21,7 +22,7 @@
                     :height="500"
                     class="bar"
                 />
-                <h2>{{ $t("analytics.dataTitle") }}</h2>
+                <h3>{{ $t("analytics.dataTitle") }}</h3>
                 <div class="table-responsive">
                     <table>
                         <thead>
@@ -66,12 +67,17 @@ export default {
         chartData: Object,
         chartOptions: Object,
     }),
+    computed: {
+        place() {
+            return this.$store.state.place
+        }
+    },
     beforeMount() {
         if (localStorage.getItem('authToken') === null) {
             this.$router.push('/login');
             return;
         }
-        getProductAnalytics(localStorage.getItem('authToken'))
+        getProductAnalytics(localStorage.getItem('authToken'), localStorage.getItem('actualPlaceId'))
             .then(response => {
                 this.generalProductsData = response.data.products;
                 this.render();
@@ -127,9 +133,21 @@ h1 {
 
 h2 {
     font-family: 'Martel Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 50px;
+    position:relative;
+    right: 50px;
+    color: #808191;
+}
+h3{
+    margin-left: 210px;
+    font-family: 'Martel Sans', sans-serif;
     font-size: 30px;
     font-weight: 700;
-    margin: 50px 0;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
 }
 
 hr {
@@ -148,6 +166,7 @@ hr {
 
 table{
     width: 60%;
+    margin-left: 210px;
 }
 table th {
     font-family: 'Martel Sans', sans-serif;

@@ -17,24 +17,17 @@ const AUTH_HEADERS = (authToken) =>  {
     }
 }
 
-/*export const getUsers = (authToken) => axios.get(`${BASE_URL}/users`, {headers: AUTH_HEADERS(authToken)});
-export const getUser = (id, authToken) => axios.get(`${BASE_URL}/users/${id}`, {headers: AUTH_HEADERS(authToken)});
-export const storeUser = (data, authToken) => axios.post(`${BASE_URL}/users`, data, {headers: AUTH_HEADERS(authToken)});
-export const updateUser = (data, authToken) => axios.put(`${BASE_URL}/users`, data, {headers: AUTH_HEADERS(authToken)});
-export const deleteUser = (id, authToken) => axios.delete(`${BASE_URL}/users/${id}`, {headers: AUTH_HEADERS(authToken)});
-
-
-export const getAnnouncements = (authToken) => axios.get(`${BASE_URL}/announcements`, {headers: AUTH_HEADERS(authToken)});
-export const getAnnouncement = (id, authToken) => axios.get(`${BASE_URL}/announcements/${id}`, {headers: AUTH_HEADERS(authToken)});
-export const storeAnnouncement = (data, authToken) => axios.post(`${BASE_URL}/announcements`, data, {headers: AUTH_HEADERS(authToken)});
-export const updateAnnouncement = (data, authToken) => axios.put(`${BASE_URL}/announcements`, data, {headers: AUTH_HEADERS(authToken)});
-export const deleteAnnouncement = (id, authToken) => axios.delete(`${BASE_URL}/announcements/${id}`, {headers: AUTH_HEADERS(authToken)});*/
-
-export const getGeneralAnalytics = (authToken) => axios.get(`${BASE_URL}/analytics/general`, {headers: AUTH_HEADERS(authToken)});
-export const getProductAnalytics = (authToken) => axios.get(`${BASE_URL}/analytics/products`, {headers: AUTH_HEADERS(authToken)});
+export const getGeneralAnalytics = (authToken, placeId) => axios.get(`${BASE_URL}/analytics/general/${placeId}`, {headers: AUTH_HEADERS(authToken)});
+export const getProductAnalytics = (authToken, placeId) => axios.get(`${BASE_URL}/analytics/products/${placeId}`, {headers: AUTH_HEADERS(authToken)});
 
 export const getUsersForPlace = (authToken) => axios.get(`${BASE_URL}/users/place`, {headers: AUTH_HEADERS(authToken)});
 export const getCustomersForPlace = (authToken) => axios.get(`${BASE_URL}/customers/place`, {headers: AUTH_HEADERS(authToken)});
+export const getPlacesForUser = (authToken) => axios.get(`${BASE_URL}/place/places`, {headers: AUTH_HEADERS(authToken)});
+export const getFirstPlaceForUser = (authToken) => axios.get(`${BASE_URL}/place/first`, {headers: AUTH_HEADERS(authToken)});
+export const getPlaceById = (authToken, placeId) => axios.get(`${BASE_URL}/place/show/${placeId}`, {headers: AUTH_HEADERS(authToken)});
+
+export const createPlace = (authToken, data) => axios.post(`${BASE_URL}/place`, data,{headers: AUTH_HEADERS(authToken)});
+export const updatePlace = (authToken, data, id) => axios.put(`${BASE_URL}/place/${id}`, data,{headers: AUTH_HEADERS(authToken)});
 
 export const register = (data) => axios.post(`${BASE_URL}/register`, data,{headers: DEFAULT_HEADERS});
 export const login = (data) => axios.post(`${BASE_URL}/login`, data,{headers: DEFAULT_HEADERS});

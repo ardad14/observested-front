@@ -3,6 +3,8 @@
         "analytics": "Аналітика",
         "customers": "Клієнти",
         "workers": "Працівники",
+        "products": "Товари",
+        "places": "Заклади",
         "exit": "Вийти",
         "language": "Ua"
     },
@@ -75,5 +77,29 @@
         },
         "already_has_account": "Вже є акаунт?",
         "login": "Увійти"
+    },
+    "places": {
+        "address": "Адреса",
+        "open": "Відкриття",
+        "close": "Закриття",
+        "redirect": "Перейти",
+        "create_place": "Створити заклад",
+        "create_from_existed": "Додати із існуючого"
+    },
+    "create_place": {
+        "title": "Створення закладу",
+        "name": "Назва",
+        "address": "Адреса",
+        "open": "Відкриття",
+        "close": "Закриття",
+        "create": "Створити"
+    },
+    "edit_place": {
+        "title": "Редагування закладу",
+        "name": "Назва",
+        "address": "Адреса",
+        "open": "Відкриття",
+        "close": "Закриття",
+        "edit": "Редагувати"
     }
 }

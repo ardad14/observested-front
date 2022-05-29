@@ -2,12 +2,12 @@
     <div>
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
             <div class="title">
-                <img alt="Vue logo" src="../../assets/image_2022-05-19_16-23-21.png">
+                <img alt="Vue logo" src="../../assets/icons/image_2022-05-19_16-23-21.png">
                 <h2>Observested</h2>
             </div>
             <hr>
             <div class="language">
-                <img alt="Vue logo" src="../../assets/icons8-география.png">
+                <img alt="Vue logo" src="../../assets/icons/icons8-география.png">
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -19,11 +19,8 @@
                     </ul>
                 </div>
             </div>
-
-
         </nav>
     </div>
-
 </template>
 
 <script>
