@@ -68,7 +68,18 @@ export default {
                 this.open = response.data.place.working_hours_start;
                 this.close = response.data.place.working_hours_end;
             })
-            .catch(response => console.log(response.data))
+            .catch(() => {
+                this.$swal({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: this.$t('something_went_wrong.title'),
+                    text: this.$t('something_went_wrong.text'),
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
+            })
     },
     updated() {
         let errors = Object.values(this.formErrors);
@@ -89,8 +100,17 @@ export default {
                 .then(() => {
                     this.$router.push('/places');
                 })
-                .catch(e => {
-                    console.log(e)
+                .catch(() => {
+                    this.$swal({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: this.$t('something_went_wrong.title'),
+                        text: this.$t('something_went_wrong.text'),
+                        toast: true,
+                        showConfirmButton: false,
+                        timer: 4000,
+                        timerProgressBar: true,
+                    });
                 })
         }
     },

@@ -85,7 +85,18 @@ export default {
                 this.generalAnalyticsData = response.data.actions.customers;
                 this.render();
             })
-            .catch(response => console.log(response.data))
+            .catch(() => {
+                this.$swal({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: this.$t('something_went_wrong.title'),
+                    text: this.$t('something_went_wrong.text'),
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
+            })
     },
     methods: {
         render: function () {

@@ -101,5 +101,13 @@
         "open": "Open",
         "close": "Close",
         "edit": "Edit"
+    },
+    "login_exception": {
+        "error": "Error",
+        "message": "Invalid login or password"
+    },
+    "something_went_wrong": {
+        "title": "Oops...",
+        "text": "Something went wrong!"
     }
 }

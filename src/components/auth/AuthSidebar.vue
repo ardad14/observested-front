@@ -14,8 +14,8 @@
                         {{ $t("navbar.language") }}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#" @click="setLocale('uk')">ua</a></li>
-                        <li><a class="dropdown-item" href="#" @click="setLocale('en-gb')">en</a></li>
+                        <li><a class="dropdown-item" @click="setLocale('uk')">ua</a></li>
+                        <li><a class="dropdown-item" @click="setLocale('en-gb')">en</a></li>
                     </ul>
                 </div>
             </div>
@@ -87,6 +87,7 @@ export default {
 .dropdown-item {
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 

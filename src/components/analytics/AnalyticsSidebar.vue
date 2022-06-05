@@ -195,6 +195,7 @@ a:hover {
 
 .analytics {
     display: flex;
+    cursor: pointer;
 }
 
 .analytics img {
@@ -283,6 +284,7 @@ ul li {
 
 .exit {
     margin-top: 25px;
+    cursor: pointer;
 }
 
 .exit img {

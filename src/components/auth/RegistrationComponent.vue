@@ -83,8 +83,17 @@ export default {
                 .then(() => {
                     window.location.replace('/login');
                 })
-                .catch(e => {
-                    console.log(e)
+                .catch(() => {
+                    this.$swal({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: this.$t('something_went_wrong.title'),
+                        text: this.$t('something_went_wrong.text'),
+                        toast: true,
+                        showConfirmButton: false,
+                        timer: 4000,
+                        timerProgressBar: true,
+                    });
                 })
         }
     },

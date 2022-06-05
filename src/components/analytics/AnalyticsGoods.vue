@@ -11,7 +11,7 @@
                         <div class=""></div>
                     </div>
                 </div>
-                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="col-5 h2">{{ $t("analytics.goods.title") }}</h1>
                     <h2>{{ this.place.name }}</h2>
                 </div>
@@ -82,7 +82,18 @@ export default {
                 this.generalProductsData = response.data.products;
                 this.render();
             })
-            .catch(response => console.log(response.data))
+            .catch(() => {
+                this.$swal({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: this.$t('something_went_wrong.title'),
+                    text: this.$t('something_went_wrong.text'),
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
+            })
     },
     methods: {
         render: function () {

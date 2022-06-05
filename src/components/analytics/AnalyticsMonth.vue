@@ -11,8 +11,8 @@
                         <div class=""></div>
                     </div>
                 </div>
-                <div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="col-5 h2">{{ $t("analytics.month.title") }}</h1>
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">{{ $t("analytics.month.title") }}</h1>
                     <h2 class="h3">{{ this.month }}</h2>
                     <h2 class="h2Custom">{{ this.place.name }}</h2>
                 </div>
@@ -102,7 +102,18 @@ export default {
                 this.generalAnalyticsData = response.data.actions.customers;
                 this.render();
             })
-            .catch(response => console.log(response.data))
+            .catch(() => {
+                this.$swal({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: this.$t('something_went_wrong.title'),
+                    text: this.$t('something_went_wrong.text'),
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
+            })
     },
     methods: {
         render: function () {
@@ -151,7 +162,7 @@ h1 {
     font-family: 'Martel Sans', sans-serif;
     font-size: 30px;
     font-weight: 700;
-    margin-top: 40px;
+    margin-top: 17px;
 }
 
 h2 {

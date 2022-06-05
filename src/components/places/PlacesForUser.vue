@@ -11,7 +11,7 @@
                             </div>
                             <div class="images">
                                 <img @click="this.$router.push({ name: 'edit_place', params: { placeId: place.id } })" alt="Vue logo" src="../../assets/icons/icons8-редактировать-100.png">
-                                <img alt="Vue logo" src="../../assets/icons/icons8-удалить-навсегда-96.png">
+                                <img @click="deletePlace(place.id)" alt="Vue logo" src="../../assets/icons/icons8-удалить-навсегда-96.png">
                             </div>
                         </div>
                         <div class="infoAddress">
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import {getPlacesForUser} from "@/api";
+import {deletePlace, getPlacesForUser} from "@/api";
 import AnalyticsSidebar from "@/components/analytics/AnalyticsSidebar";
 
 export default {
@@ -66,12 +66,39 @@ export default {
                 this.places = response.data.places;
                 console.log(this.places)
             })
-            .catch(response => console.log(response.data))
+            .catch(() => {
+                this.$swal({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: this.$t('something_went_wrong.title'),
+                    text: this.$t('something_went_wrong.text'),
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
+            })
     },
     methods: {
         changePlace: (placeId) => {
             localStorage.setItem('actualPlaceId', placeId);
             window.location.replace('/analytics/general');
+        },
+        deletePlace: (placeId) => {
+            deletePlace(localStorage.getItem('authToken'), placeId)
+                .then(window.location.reload)
+                .catch(() => {
+                    this.$swal({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: this.$t('something_went_wrong.title'),
+                        text: this.$t('something_went_wrong.text'),
+                        toast: true,
+                        showConfirmButton: false,
+                        timer: 4000,
+                        timerProgressBar: true,
+                    });
+                })
         }
     }
 

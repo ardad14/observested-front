@@ -28,6 +28,7 @@ export const getPlaceById = (authToken, placeId) => axios.get(`${BASE_URL}/place
 
 export const createPlace = (authToken, data) => axios.post(`${BASE_URL}/place`, data,{headers: AUTH_HEADERS(authToken)});
 export const updatePlace = (authToken, data, id) => axios.put(`${BASE_URL}/place/${id}`, data,{headers: AUTH_HEADERS(authToken)});
+export const deletePlace = (authToken, id) => axios.delete(`${BASE_URL}/place/${id}`, {headers: AUTH_HEADERS(authToken)});
 
 export const register = (data) => axios.post(`${BASE_URL}/register`, data,{headers: DEFAULT_HEADERS});
 export const login = (data) => axios.post(`${BASE_URL}/login`, data,{headers: DEFAULT_HEADERS});
