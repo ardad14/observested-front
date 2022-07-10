@@ -70,7 +70,7 @@ export default {
                 'working_hours_end': this.close,
             })
                 .then(() => {
-                    console.log(1)
+                    this.$router.push('/places');
                 })
                 .catch(() => {
                     this.$swal({

@@ -14,10 +14,10 @@ export default {
         }
         if (localStorage.getItem('actualPlaceId') === null) {
             getFirstPlaceForUser(localStorage.getItem('authTokenDate'))
-                .then(response => this.$store.commit('setPlace', response.data.place));
+                .then(response => this.$store.commit('setPlace', response.data));
         } else {
             getPlaceById(localStorage.getItem('authToken'), localStorage.getItem('actualPlaceId'))
-                .then(response => this.$store.commit('setPlace', response.data.place));
+                .then(response => this.$store.commit('setPlace', response.data));
         }
     },
     methods: {

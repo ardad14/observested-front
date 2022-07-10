@@ -35,9 +35,9 @@
                     <button @click="this.$router.push('/place/create');" class="create">
                         {{ $t("places.create_place") }}
                     </button>
-                    <button class="add">
+<!--                    <button class="add">
                         {{ $t("places.create_from_existed") }}
-                    </button>
+                    </button>-->
                 </div>
             </div>
         </div>
@@ -63,8 +63,7 @@ export default {
         }
         getPlacesForUser(localStorage.getItem('authToken'))
             .then(response => {
-                this.places = response.data.places;
-                console.log(this.places)
+                this.places = response.data;
             })
             .catch(() => {
                 this.$swal({

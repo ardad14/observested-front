@@ -79,7 +79,7 @@ export default {
         }
         getProductAnalytics(localStorage.getItem('authToken'), localStorage.getItem('actualPlaceId'))
             .then(response => {
-                this.generalProductsData = response.data.products;
+                this.generalProductsData = response.data;
                 this.render();
             })
             .catch(() => {

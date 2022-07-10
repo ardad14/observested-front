@@ -55,7 +55,7 @@ export default {
         }
         getUsersForPlace(localStorage.getItem('authToken'))
             .then(response => {
-                this.users = response.data.users;
+                this.users = response.data;
                 console.log(this.users);
             })
             .catch(() => {

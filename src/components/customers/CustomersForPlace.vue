@@ -12,8 +12,6 @@
                             <th scope="col">{{ $t("clients.table.name") }}</th>
                             <th scope="col">{{ $t("clients.table.surname") }}</th>
                             <th scope="col">{{ $t("clients.table.age") }}</th>
-                            <th scope="col">{{ $t("clients.table.spendMoney") }}</th>
-                            <th scope="col">.</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -22,8 +20,6 @@
                             <td>{{ cutomer.name }}</td>
                             <td>{{ cutomer.surname }}</td>
                             <td>{{ cutomer.age }}</td>
-                            <td>{{ cutomer.spend_money }} грн</td>
-                            <td><button class="btn"><a>{{ $t("clients.table.change") }}</a></button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -52,7 +48,7 @@ export default {
         }
         getCustomersForPlace(localStorage.getItem('authToken'))
             .then(response => {
-                this.customers = response.data.customers;
+                this.customers = response.data;
                 console.log(this.customers);
             })
             .catch(response => console.log(response.data))

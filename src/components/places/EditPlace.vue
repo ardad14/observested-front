@@ -63,10 +63,10 @@ export default {
         console.log(this.$route.params);
         getPlaceById(localStorage.getItem('authToken'), this.$route.params.placeId)
             .then(response => {
-                this.name = response.data.place.name;
-                this.address = response.data.place.address;
-                this.open = response.data.place.working_hours_start;
-                this.close = response.data.place.working_hours_end;
+                this.name = response.data.name;
+                this.address = response.data.address;
+                this.open = response.data.working_hours_start;
+                this.close = response.data.working_hours_end;
             })
             .catch(() => {
                 this.$swal({

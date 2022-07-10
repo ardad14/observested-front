@@ -77,10 +77,10 @@
             <img alt="Vue logo" src="../../assets/icons/icons8_мужчины_возрастной_группы_5_100_1.png">
             <a href="/customers">{{ $t("navbar.customers") }}</a>
         </div>
-        <div :class="[currentTab === 'products' ? 'current' : 'list', 'nav-item']">
+<!--        <div :class="[currentTab === 'products' ? 'current' : 'list', 'nav-item']">
             <img alt="Vue logo" src="../../assets/icons/icons8-товар-100.png">
             <a href="/products">{{ $t("navbar.products") }}</a>
-        </div>
+        </div>-->
         <hr>
         <div :class="[currentTab === 'places' ? 'current' : 'list', 'nav-item']">
             <img alt="Vue logo" src="../../assets/icons/icons8-здание-ресторана-100.png">

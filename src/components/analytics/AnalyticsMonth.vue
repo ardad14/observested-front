@@ -99,7 +99,7 @@ export default {
         }
         getGeneralAnalytics(localStorage.getItem('authToken'), localStorage.getItem('actualPlaceId'))
             .then(response => {
-                this.generalAnalyticsData = response.data.actions.customers;
+                this.generalAnalyticsData = response.data.customers;
                 this.render();
             })
             .catch(() => {
@@ -117,7 +117,9 @@ export default {
     },
     methods: {
         render: function () {
-            let actionsData = this.generalAnalyticsData.filter(data => moment(data.created_at).month() === moment().get('month'));
+            let actionsData = this.generalAnalyticsData.filter(data => moment(data.pivot.created_at).month() === moment().get('month'));
+
+
 
             let labels = [...Array(actionsData.length)].map((v, i) => i + 1);
             let data = actionsData.map(data => data.pivot.spend_money);

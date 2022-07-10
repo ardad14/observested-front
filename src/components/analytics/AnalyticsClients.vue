@@ -81,7 +81,7 @@ export default {
         }
         getGeneralAnalytics(localStorage.getItem('authToken'), localStorage.getItem('actualPlaceId'))
             .then(response => {
-                this.generalAnalyticsData = response.data.actions.customers;
+                this.generalAnalyticsData = response.data.customers;
                 this.render();
             })
             .catch(() => {
